@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include('partials/meta') %>
+    <!-- Load styles -->
+    <title>
+      Homepage - tabler.github.io - a responsive, flat and full featured admin
+      template
+    </title>
+
+    <%- include('partials/scripts') %>
+    <%- include('partials/styles') %>
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <%- include('partials/header') %>
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <div class="page-header"><h1 class="page-title">New Entry</h1></div>
+            <form id="new-entry-form">
+              <div class="card-header">
+                <h3 class="card-title"><%- collection %> entry</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12">
+                      <% for (const input of inputs) { %>
+                        <%- input %>
+                      <% } %>
+                  </div>
+              </div>
+            </div>
+            <div class="card-footer text-right">
+              <div class="d-flex">
+                <a href="javascript:void(0)" class="btn btn-link">Cancel</a>
+                <button class="btn btn-primary ml-auto" onclick="validateNewCollection()">Submit</button>
+              </div>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+      <%- include('partials/footer') %>
+      <%- include('partials/form_scripts') %>
+      <script>
+        var form = document.getElementById('new-entry-form');
+        const collection = '<%- collection -%>';
+        function transformFormData(formData) {
+          return {entry: formData, collection};
+        }
+        window.validateNewCollection = function() {
+          submitForm(
+            form,
+            '/admin/collection/<%- collection %>/new',
+            data => transformFormData(data),
+            '/admin/collection/<%- collection %>');
+          form.addEventListener('submit', e => e.preventDefault());
+        }
+        </script>
+  </body>
+</html>

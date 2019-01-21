@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include('partials/meta') %>
+    <!-- Load styles -->
+    <%- include('partials/styles') %>
+    <title>
+      Homepage - tabler.github.io - a responsive, flat and full featured admin
+      template
+    </title>
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <%- include('partials/header') %>
+
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <div class="page-header"><h1 class="page-title">Dashboard</h1></div>
+            <div class="row row-cards">
+              <% for (const info of quickStats) { %>
+              <div class="col-sm-4 col-lg-2">
+                <div class="card clickable-row" data-href="<%- info.href %>">
+                  <div class="card-body p-3 text-center">
+                    <div class="text-right text-green">
+                      <i class="fe fe-chevron-up"></i>
+                    </div>
+                    <div class="h1 m-0"><%- info.value %></div>
+                    <div class="text-muted mb-4"><%- info.name %></div>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+
+              <!-- <div class="col-sm-6 col-lg-3">
+                <div class="card p-3">
+                  <div class="d-flex align-items-center">
+                    <span class="stamp stamp-md bg-blue mr-3">
+                      <i class="fe fe-dollar-sign"></i>
+                    </span>
+                    <div>
+                      <h4 class="m-0">
+                        <a href="javascript:void(0)"
+                          >132 <small>Sales</small></a
+                        >
+                      </h4>
+                      <small class="text-muted">12 waiting payments</small>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <%- include('partials/footer') %>
+      <%- include('partials/scripts') %>
+  </body>
+</html>

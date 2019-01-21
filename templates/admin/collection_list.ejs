@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include('partials/meta') %>
+    <!-- Load styles -->
+    <%- include('partials/styles') %>
+    <title>
+      Homepage - tabler.github.io - a responsive, flat and full featured admin
+      template
+    </title>
+
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <%- include('partials/header') %>
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <div class="page-header"><h1 class="page-title">Collection</h1></div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title"></h3>
+                        <div>Showing results <%- pagination.fromResult %> - <%- pagination.toResult %> of <%- pagination.totalResult %></div>
+
+                        <div class="card-options">
+                          <a href="/admin/collection/<%- collection %>/new" class="btn btn-primary btn-sm">New Entry</a>
+                          <a href="/admin/collection/<%- collection %>/modify" class="btn btn-secondary btn-sm ml-2">Modify</a>
+                          <a href="/admin/collection/<%- collection %>/delete" class="btn btn-danger btn-sm ml-2">Delete</a>
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table card-table table-striped table-vcenter text-nowrap">
+                          <thead>
+                            <tr>
+                            <% for (const header of headers) { %>
+                              <th><%- header %></th>
+                            <% } %>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% for (const row of rows) { %>
+                            <tr class="clickable-row"  data-href="<%- row.href %>"><% for (const header of headers) { %>
+                              <td><span><%- (row[header] || '').toString().substring(0, 50) %></span></td><% } %>
+                            </tr><% } %>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="card-footer">
+                          <ul class="pagination pagination-simple">
+                              <% if (pagination.previous) { %>
+                                <li class="page-item"><span class="page-link" data-pagination="<%- pagination.first %>">First</span></li>
+                                <li class="page-item page-prev"><span class="page-link" data-pagination="<%- pagination.previous %>">Prev</span></li>
+                              <% } for (const page of pagination.range) { %>
+                              <li class="page-item <%- page === pagination.current ? 'active': '' %>"><span class="page-link" data-pagination="<%- page %>"><%- page %></span></li>
+                              <% } if (pagination.next) { %>
+                                <li class="page-item page-prev"><span class="page-link" data-pagination="<%- pagination.next %>">Next</span></li>
+                                <li class="page-item"><span class="page-link" data-pagination="<%- pagination.last %>">Last</span></li>
+                              <% } %>
+                                <li class="page-item"><span class="page-link"></span></li>
+                            </ul>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%- include('partials/footer') %>
+      <%- include('partials/scripts') %>
+  </body>
+</html>

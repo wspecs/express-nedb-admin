@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include('partials/meta') %>
+    <!-- Load styles -->
+    <%- include('partials/styles') %>
+    <title>
+      Homepage - tabler.github.io - a responsive, flat and full featured admin
+      template
+    </title>
+
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <%- include('partials/header') %>
+
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <div class="page-header"><h1 class="page-title">Create New Collection</h1></div>
+            <div class="row">
+                <form id="new-collection-form" class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Collection Detail</h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="form-group col-sm-8 col-md-10">
+                          <label class="form-label">
+                            Collection Name <span class="form-required">*</span>
+                          </label>
+                          <input name="collection" type="text" class="form-control" placeholder="sample" required>
+                        </div>
+                      </div>
+                      <div class="form-label">Proterty</div>
+                      <div class="table-responsive">
+                        <table class="table mb-0">
+                          <thead>
+                            <tr>
+                              <th class="pl-0">Type</th>
+                              <th>Property Name</th>
+                              <th>Required</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr id="collection-row-0">
+                            <td class="pl-0">
+                              <select class="custom-select" name="type0">
+                                <option value="boolean">Boolean</option>
+                                <option value="markdown">MarkDown</option>
+                                <option value="number">Number</option>
+                                <option value="list">Tags</option>
+                                <option value="string" selected="">Text</option>
+                              </select>
+                            </td>
+                            <td>
+                              <input type="text" name="name0" class="form-control" required>
+                              <input type="text" name="indexes[]" class="form-control" value="index0" hidden>
+                            </td>
+                            <td>
+                              <% checkYes = true; inputName = 'required0' %>
+                              <%- include('partials/yes_no_input') %>
+                            </td>
+                            <td>
+                                <% checkYes = true; inputName = 'preview0' %>
+                                <%- include('partials/yes_no_input') %>
+                            </td>
+                            <td>
+                                <% rowIndex = 0 %>
+                                <%- include('partials/collections_form_delete_row') %>
+                            </td>
+                          </tr>
+                        </tbody></table>
+                      </div>
+                    </div>
+                    <div class="card-footer text-right">
+                      <button class="btn btn-secondary" onclick="addNewRow()">Add New Row</button>
+                      <button class="btn btn-primary" onclick="validateNewCollection()">Submit</button>
+                    </div>
+                  </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <%- include('partials/footer') %>
+      <%- include('partials/form_scripts') %>
+      <script>
+          var form = document.getElementById('new-collection-form');
+          const row = document.querySelector('tbody tr');
+          const rows =  document.querySelector('tbody');
+
+          window.addNewRow = function() {
+            addNewCollectionRow(0, form);
+          }
+
+          window.validateNewCollection = function() {
+            submitForm(form,
+            '/admin/collection/new',
+            data => transformNewRowData(data),
+            '/admin/collection/all');
+          }
+        </script>
+    <%- include('partials/scripts') %>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include('partials/meta') %>
+    <!-- Load styles -->
+    <title>
+      Homepage - tabler.github.io - a responsive, flat and full featured admin
+      template
+    </title>
+
+    <%- include('partials/styles') %>
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <%- include('partials/header') %>
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <div class="page-header"><h1 class="page-title">View <%- collection %> entry</h1></div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Entry Details</h3>
+                    <div class="card-options">
+                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="#" class="btn btn-danger btn-sm ml-2">Delete</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="text-wrap">
+                    <h6>Created</h6>
+                    <i time-ago datetime="<%- _created %>"></i>
+                    <h6>Updated</h6>
+                    <i time-ago datetime="<%- _updated %>"></i>
+                    <h6>Status</h6>
+                    <div class="tag">
+                      active
+                      <span class="tag-addon tag-<%- _archived ? 'danger' : 'success' %>"><%- _archived ? 'No' : 'Yes' %></span>
+                    </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%- include('partials/footer') %>
+    <%- include('partials/scripts') %>
+    <%- include('partials/form_scripts') %>
+  </body>
+</html>

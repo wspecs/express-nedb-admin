@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include('partials/meta') %>
+    <!-- Load styles -->
+    <%- include('partials/styles') %>
+    <title>
+      Homepage - tabler.github.io - a responsive, flat and full featured admin
+      template
+    </title>
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <%- include('partials/header') %>
+
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <div class="page-header"><h1 class="page-title">Collections</h1></div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">Overview</h3>
+                        <div class="card-options">
+                          <a href="/admin/collection/new" class="btn btn-primary btn-sm">New Collection</a>
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table card-table table-vcenter text-nowrap">
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Entries</th>
+                              <th>Size</th>
+                              <th>Modified</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% for (const info of collections) { %>
+                            <tr class="clickable-row" data-href="<%- info.href %>">
+                              <td><span><%- info.collectionTitle %></span></td>
+                              <td><span><%- info.rows %></span></td>
+                              <td><span class="text-muted"><%- info.size %></span></td>
+                              <td><span class="text-muted" time-ago datetime="<%- info.mtime.toISOString() %>"><%- info.mtime.toISOString() %></span></td>
+                            </tr>
+                            <% } %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%- include('partials/footer') %>
+      <%- include('partials/scripts') %>
+  </body>
+</html>

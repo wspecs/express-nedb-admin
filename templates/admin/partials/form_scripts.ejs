@@ -1,0 +1,38 @@
+<script src="/admin/assets/js/vendors/form2json.js"></script>
+<script src="/admin/assets/js/vendors/pristine.js"></script>
+<script src="/admin/assets/js/vendors/md5.min.js"></script>
+<script>
+  window.submitForm = submitForm;
+  window.addNewCollectionRow = addNewCollectionRow;
+  window.transformNewRowData = transformNewRowData;
+
+  function addNewCollectionRow(maxIndex = 0, form) {
+    maxIndex++;
+    const element = document.createElement('tr');
+    element.innerHTML = row.outerHTML
+      .replace(/type0/g, `type${maxIndex}`)
+      .replace(/index0/g, `index${maxIndex}`)
+      .replace(/name0/g, `name${maxIndex}`)
+      .replace(/preview0/g, `preview${maxIndex}`)
+      .replace(/required0/g, `required${maxIndex}`)
+      .replace(/collection-row-0/g, `collection-row-${maxIndex}`);
+    rows.appendChild(element);
+    form.addEventListener('submit', e => e.preventDefault());
+  }
+
+  function transformNewRowData(formData) {
+    const schema = [];
+    for (const item of formData.indexes) {
+      const index = Number(item.replace('index', ''));
+      schema.push({
+        name: formData[`name${index}`],
+        type: formData[`type${index}`],
+        required: formData[`required${index}`] === 'Yes',
+        preview: formData[`preview${index}`] === 'Yes'
+      });
+    }
+    console.log(formData);
+    console.log(JSON.stringify({ collection: formData.collection, schema }));
+    return { collection: formData.collection, schema };
+  }
+</script>

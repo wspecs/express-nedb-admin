@@ -1,0 +1,102 @@
+<script src="/admin/assets/js/vendors/timeago.min.js"></script>
+<script src="/admin/assets/js/require.min.js"></script>
+<script>
+  requirejs.config({
+    baseUrl: '.'
+  });
+</script>
+<!-- Dashboard Core -->
+<script src="/admin/assets/js/dashboard.require.js"></script>
+<!-- c3.js Charts Plugin -->
+<script src="/admin/assets/plugins/charts-c3/plugin.min.js"></script>
+<!-- Input Mask Plugin -->
+<script src="/admin/assets/plugins/input-mask/plugin.min.js"></script>
+
+<script>
+  window.postJSON = postJSON;
+
+  const clickableRows = document.querySelectorAll('.clickable-row') || [];
+  for (const row of clickableRows) {
+    row.addEventListener('click', () => {
+      window.location.href = row.dataset.href;
+    });
+  }
+
+  const paginationElements =
+    document.querySelectorAll('*[data-pagination]') || [];
+  for (const paginationElement of paginationElements) {
+    paginationElement.addEventListener('click', () => {
+      const page = paginationElement.dataset.pagination;
+      const params = new URLSearchParams(window.location.search);
+      params.set('page', page);
+      window.location.href = window.location.pathname + '?' + params.toString();
+      console.log(window.location.pathname, page);
+      // window.location.href = row.dataset.href;
+    });
+  }
+
+  const deleteElements = document.querySelectorAll('*[data-delete]') || [];
+  for (const element of deleteElements) {
+    element.addEventListener('click', () => {
+      const elementToRemove = document.getElementById(element.dataset.delete);
+      elementToRemove.remove();
+    });
+  }
+
+  timeago.render(document.querySelectorAll('*[time-ago]'));
+
+  const restElements = document.querySelectorAll('*[data-rest-href]') || [];
+  for (const element of restElements) {
+    element.addEventListener('click', () => {
+      const url = element.dataset.restHref;
+      const action = element.dataset.restAction;
+      delete element.dataset.restAction;
+      delete element.dataset.restHref;
+      const body = element.dataset;
+      if (action.toUpperCase() === 'POST') {
+        postJSON(url, body).then(() =>
+          redirectUrl(element.dataset.redirectUrl)
+        );
+      }
+    });
+  }
+
+  function redirectUrl(url = '') {
+    window.location.href = url || '/admin/dashboard';
+  }
+
+  async function postJSON(url, body) {
+    return fetch(url, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      redirect: 'follow',
+      referrer: 'no-referrer',
+      body: JSON.stringify(body)
+    }).then(response => response.json());
+  }
+  function submitForm(
+    form,
+    url,
+    transformFormdata = data => data,
+    pageRedirectUrl = null
+  ) {
+    form.addEventListener('submit', e => e.preventDefault());
+    var pristine = new Pristine(form);
+    var valid = pristine.validate(); // returns true or false
+    if (valid) {
+      const formData = transformFormdata(form2js(form));
+      postJSON(url, formData)
+        .then(json => {
+          if (json.success) redirectUrl(pageRedirectUrl);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } else {
+      console.log(valid);
+    }
+  }
+</script>

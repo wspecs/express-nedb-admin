@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include('partials/meta') %>
+    <!-- Load styles -->
+    <%- include('partials/styles') %>
+    <title>
+      Homepage - tabler.github.io - a responsive, flat and full featured admin
+      template
+    </title>
+
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <%- include('partials/header') %>
+
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <div class="page-header"><h1 class="page-title">Create New Collection</h1></div>
+            <div class="row">
+                <form id="new-collection-form" class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Collection Detail</h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="form-group col-sm-8 col-md-10">
+                          <label class="form-label">
+                            Collection Name <span class="form-required">*</span>
+                          </label>
+                          <input name="collection" type="text" class="form-control" value="<%- collection %>" disabled>
+                          <input name="collection" type="text" class="form-control" value="<%- collection %>" hidden>
+                        </div>
+                      </div>
+                      <div class="form-label">Proterty</div>
+                      <div class="table-responsive">
+                        <table class="table mb-0">
+                          <thead>
+                            <tr>
+                              <th class="pl-0">Type</th>
+                              <th>Property Name</th>
+                              <th>Required</th>
+                              <th>Show in list</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% for (let index = 0; index < schema.schema.length; index++) { %>
+                            <% info = schema.schema[index] %>
+                            <tr id="collection-row-<%- index %>">
+                            <td class="pl-0">
+                              <select class="custom-select" name="type<%- index %>">
+                                <option value="boolean"  <%- info.type === 'boolean' ? 'selected' : '' %>>Boolean</option>
+                                <option value="markdown"  <%- info.type === 'markdown' ? 'selected' : '' %>>MarkDown</option>
+                                <option value="number"  <%- info.type === 'number' ? 'selected' : '' %>>Number</option>
+                                <option value="list"  <%- info.type === 'list' ? 'selected' : '' %>>Tags</option>
+                                <option value="string" <%- info.type === 'string' ? 'selected' : '' %>>Text</option>
+                              </select>
+                            </td>
+                            <td>
+                              <input type="text" name="name<%- index %>" class="form-control" value="<%- info.name %>" required>
+                              <input type="text" name="indexes[]" class="form-control" value="index<%- index %>" hidden>
+                            </td>
+                            <td>
+                                <div class="selectgroup w-100">
+                                    <label class="selectgroup-item">
+                                      <input type="radio" name="required<%- index %>" value="Yes" class="selectgroup-input" <%- info.required ? 'checked' : '' %>>
+                                      <span class="selectgroup-button">Yes</span>
+                                    </label>
+                                    <label class="selectgroup-item">
+                                      <input type="radio" name="required<%- index %>" value="No" class="selectgroup-input" <%- info.required ? '' : 'checked' %>>
+                                      <span class="selectgroup-button">No</span>
+                                    </label>
+                                  </div>
+                            </td>
+                            <td>
+                              <div class="selectgroup w-100">
+                                  <label class="selectgroup-item">
+                                    <input type="radio" name="preview<%- index %>" value="Yes" class="selectgroup-input" <%- info.preview ? 'checked' : '' %>>
+                                    <span class="selectgroup-button">Yes</span>
+                                  </label>
+                                  <label class="selectgroup-item">
+                                    <input type="radio" name="preview<%- index %>" value="No" class="selectgroup-input" <%- info.preview ? '' : 'checked' %>>
+                                    <span class="selectgroup-button">No</span>
+                                  </label>
+                                </div>
+                            </td>
+                            <td>
+                              <% rowIndex = index %>
+                              <%- include('partials/collections_form_delete_row') %>
+                            </td>
+                          </tr>
+                          <% } %>
+                        </tbody></table>
+                      </div>
+                    </div>
+                    <div class="card-footer text-right">
+                      <button class="btn btn-secondary" onclick="addNewRow()">Add New Row</button>
+                      <button class="btn btn-primary" onclick="validateNewCollection()">Submit</button>
+                    </div>
+                  </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <%- include('partials/footer') %>
+      <%- include('partials/form_scripts') %>
+      <script>
+          var form = document.getElementById('new-collection-form');
+          const row = document.querySelector('tbody tr');
+          const rows =  document.querySelector('tbody');
+
+          window.addNewRow = function() {
+            addNewCollectionRow(<%- schema.schema.length - 1 %>, form);
+          }
+
+          window.validateNewCollection = function() {
+            submitForm(
+              form, 
+              '/admin/collection/<%- collection %>/modify',
+              data => transformNewRowData(data),
+              '/admin/collection/<%- collection %>');
+          }
+        </script>
+    <%- include('partials/scripts') %>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+{
+  "author": {
+    "name": "Wendly Saintil",
+    "email": "wendlysaintil@gmail.com",
+    "url": "https://twitter.com/wendlysaintil",
+    "git": "wspecs"
+  },
+  "bin": {
+    "express-nedb-admin": "bin/index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/wspecs/express-nedb-admin/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "commander": "^2.19.0",
+    "great-logs": "0.0.4",
+    "prompts": "^2.0.1",
+    "@decorators/di": "^1.0.2",
+    "@decorators/express": "^2.3.0",
+    "@overnightjs/core": "^1.3.3",
+    "args-finder": "0.0.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "client-sessions": "^0.8.0",
+    "cookie-parser": "^1.4.3",
+    "cookies": "^0.7.1",
+    "crypto": "^1.0.1",
+    "cryptr": "^4.0.2",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-starter-config": "0.0.2",
+    "faker": "^4.1.0",
+    "filesize": "^4.0.0",
+    "html-minifier": "^3.5.21",
+    "i18n": "^0.8.3",
+    "joi": "^14.3.1",
+    "md5": "^2.2.1",
+    "mkdirp": "^0.5.1",
+    "nedb": "^1.8.0",
+    "pagination": "^0.4.6",
+    "path": "^0.12.7",
+    "shelljs": "^0.8.3",
+    "walkdir": "0.0.12"
+  },
+  "deprecated": false,
+  "description": "Admin interface for express application with NEDB database",
+  "devDependencies": {
+    "@types/chai": "^4.1.3",
+    "@types/mocha": "^5.2.0",
+    "@types/node": "^10.0.2",
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1",
+    "node-readme": "^0.1.9"
+  },
+  "homepage": "https://github.com/wspecs/express-nedb-admin#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "express-nedb-admin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wspecs/express-nedb-admin.git"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc && npm run readme",
+    "readme": "node ./node_modules/.bin/node-readme",
+    "test": "mocha ./dist/test/*.js"
+  },
+  "types": "dist/index.d.ts",
+  "version": "0.0.2"
+}

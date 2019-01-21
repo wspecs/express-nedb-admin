@@ -1,0 +1,63 @@
+<!-- prettier-ignore-start -->
+# ${pkg.name}
+
+${pkg.description}
+
+${badge('npm')} ${badge('npm-license')} ${badge('github-issues')}
+
+${badge('nodei')}
+
+${badge('travis-status')}
+${badge('github-stars')}
+${badge('github-forks')}
+
+${badge('github-forks')}
+
+${badge('dependencies')}
+${badge('devDependencies')}
+
+## Features
+
+- ${pkg.description}
+
+## Usage
+
+```bash
+tsm-starter
+> ✔ Name of the package … name-of-the-package
+> ✔ Description of the package … Descriptionm for the package
+> ✔ License type … MIT
+> ✔ What's your name? … Author's Name
+> ✔ What's your email? … Author's Email
+> ✔ What's your website url? … Author's Url
+> ✔ What's your GitHub repo? … Author's GitHub Repo
+```
+
+## Install
+
+`npm install --save ${pkg.name}`
+
+Or as binary
+
+``npm install --g ${pkg.name}`
+
+## Scripts
+
+${scripts()}
+
+## Dependencies
+
+${dependencies()}
+
+## Contributing
+
+Please check the [Contributing Guidelines](contributing.md) for more details. Thanks!
+
+## Author
+
+[${pkg.author.name}](${pkg.author.url})
+
+## License
+
+[${pkg.license}](LICENSE)
+<!-- prettier-ignore-end -->

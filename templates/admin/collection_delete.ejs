@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include('partials/meta') %>
+    <!-- Load styles -->
+    <%- include('partials/styles') %>
+    <title>
+      Homepage - tabler.github.io - a responsive, flat and full featured admin
+      template
+    </title>
+
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <%- include('partials/header') %>
+
+        <div class="my-3 my-md-5">
+          <div class="container">
+            <div class="page-header"><h1 class="page-title">Delete <%- collection %> collection</h1></div>
+            <div class="alert alert-danger alert-dismissible">
+                <h4>Are you sure?</h4>
+                <p>
+                    This action will archived the <strong><%- collection %></strong> collection.
+                </p>
+                <div class="btn-list">
+                    <button
+                        class="btn btn-danger"
+                        data-rest-action="POST"
+                        data-rest-href="/admin/collection/<%- collection %>/delete"
+                        data-redirect-url="/admin/collection/all"
+                        type="button">Yes</button>
+                    <a class="btn btn-secondary" href="/admin/collection/<%- collection %>">No, thanks</a>
+                </div>
+                </div>
+          </div>
+        </div>
+      </div>
+
+      <%- include('partials/footer') %>
+      <%- include('partials/scripts') %>
+  </body>
+</html>
