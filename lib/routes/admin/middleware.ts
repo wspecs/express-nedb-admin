@@ -1,3 +1,4 @@
+// package-dependency: import * from '@decorators/di'
 import { Middleware } from '@decorators/express';
 
 const ADMIN_ROUTE_TEMPLATES_PATH = `${__dirname}/../../../../templates`;

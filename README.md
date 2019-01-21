@@ -51,19 +51,20 @@ Or as binary
 
 Package | Version | Dev
 --- |:---:|:---:
-[commander](https://www.npmjs.com/package/commander) | ^2.19.0 | ✖
-[great-logs](https://www.npmjs.com/package/great-logs) | 0.0.4 | ✖
-[prompts](https://www.npmjs.com/package/prompts) | ^2.0.1 | ✖
+[@decorators/di](https://www.npmjs.com/package/@decorators/di) | ^1.0.2 | ✖
 [@decorators/express](https://www.npmjs.com/package/@decorators/express) | ^2.3.0 | ✖
 [bcryptjs](https://www.npmjs.com/package/bcryptjs) | ^2.4.3 | ✖
+[commander](https://www.npmjs.com/package/commander) | ^2.19.0 | ✖
 [crypto](https://www.npmjs.com/package/crypto) | ^1.0.1 | ✖
 [express-starter-config](https://www.npmjs.com/package/express-starter-config) | 0.0.2 | ✖
 [faker](https://www.npmjs.com/package/faker) | ^4.1.0 | ✖
 [filesize](https://www.npmjs.com/package/filesize) | ^4.0.0 | ✖
+[great-logs](https://www.npmjs.com/package/great-logs) | 0.0.4 | ✖
 [joi](https://www.npmjs.com/package/joi) | ^14.3.1 | ✖
 [md5](https://www.npmjs.com/package/md5) | ^2.2.1 | ✖
 [nedb](https://www.npmjs.com/package/nedb) | ^1.8.0 | ✖
 [pagination](https://www.npmjs.com/package/pagination) | ^0.4.6 | ✖
+[prompts](https://www.npmjs.com/package/prompts) | ^2.0.1 | ✖
 [shelljs](https://www.npmjs.com/package/shelljs) | ^0.8.3 | ✖
 [walkdir](https://www.npmjs.com/package/walkdir) | 0.0.12 | ✖
 [@types/chai](https://www.npmjs.com/package/@types/chai) | ^4.1.3 | ✔
